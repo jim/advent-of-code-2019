@@ -43,7 +43,6 @@ if MiniTest.run
 
   inputs = Enumerator.new do |y|
     max = 100
-    noun = verb = 0
     max.times do |noun|
       max.times do |verb|
         y << [noun, verb]
