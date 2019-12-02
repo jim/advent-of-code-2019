@@ -1,7 +1,6 @@
 require 'minitest'
 
 def compute(program)
-  program = program.dup
   index = 0
 
   loop do
