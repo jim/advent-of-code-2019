@@ -18,7 +18,7 @@ def compute(program)
     end
     index += 4
   end
-  
+
   program
 end
 
@@ -35,9 +35,33 @@ if MiniTest.run
   input_path = File.expand_path("../input", __FILE__)
   program = File.read(input_path).strip.split(",").map(&:to_i)
 
-  program[1] = 12
-  program[2] = 2
+  part1 = program.dup
+  part1[1] = 12
+  part1[2] = 2
 
-  result = compute(program)
-  puts "final state: #{result}"
+  result = compute(part1)
+  puts "final state for part 1: #{result}"
+
+  inputs = Enumerator.new do |y|
+    max = 100
+    noun = verb = 0
+    max.times do |noun|
+      max.times do |verb|
+        y << [noun, verb]
+      end
+    end
+  end
+
+  inputs.each do |noun, verb|
+    state = program.dup
+    state[1] = noun
+    state[2] = verb
+    result = compute(state)
+    if result[0] == 19690720
+      puts "noun is #{noun}; verb is #{verb}"
+      puts "answer for part 2 is #{100 * noun + verb}"
+      exit(0)
+    end
+  end
+
 end
